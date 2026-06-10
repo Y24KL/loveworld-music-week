@@ -48,7 +48,7 @@ export default function Home() {
           
           {/* 1. REPLACED LOGO with your cinematic image */}
           <Image
-            src="/lmw_logo.png" // Assumes you placed image_9.png here and renamed
+            src="/LOVEWORLD_MUSIC_LOGO-removebg-preview.jpg" // Assumes you placed image_9.png here and renamed
             alt="LoveWorld Music Week Logo"
             width={240} // Scaled to look premium in header
             height={80} // Scaled to look premium in header
@@ -133,7 +133,7 @@ export default function Home() {
           </div>
           <div className="lg:col-span-7 bg-white/[0.01] border border-white/5 p-8 md:p-12 rounded-3xl backdrop-blur-xl space-y-6 text-neutral-300 leading-relaxed text-base md:text-lg">
             <p>
-              LoveWorld Music Week is a divinely inspired global convergence designed to standardize, elevate, and align spiritual music production with ultimate excellence. It isn’t merely an assembly of creators—it is an active spiritual laboratory where divine blueprints meet state-of-the-art technological systems.
+              LoveWorld Music Week is a divinely inspired by our Man of God, Rev.Dr Chris Oyakhilome Dsc.Dsc.DD to standardize, elevate, and align spiritual music production with ultimate excellence. It isn’t merely an assembly of creators—it is an active spiritual laboratory where divine blueprints meet state-of-the-art technological systems.
             </p>
             <p className="border-l-2 border-amber-500/40 pl-6 italic text-neutral-400 text-sm md:text-base">
               "We are deploying pristine digital assets and structured administrative architectures to ensure the gospel’s message maintains unmatched global broadcasting authority."
@@ -193,7 +193,7 @@ export default function Home() {
         <div className="space-y-4">
           <h2 className="text-4xl font-extrabold tracking-tight">Access Channels</h2>
           <p className="text-neutral-400 text-base max-w-xl mx-auto">
-            Choose your deployment vector below to synchronize with ongoing preparations or secure financial seed options.
+            Choose your deployment vector below to synchronize with ongoing preparations or Partner with the LMM/LFAD.
           </p>
         </div>
 
@@ -202,7 +202,7 @@ export default function Home() {
           {/* 3. TAILORED COLOR: subtle sapphire glow to balance with gold */}
           <div className="bg-white/[0.01] border border-white/5 p-8 rounded-2xl backdrop-blur-md flex flex-col justify-between items-start space-y-6 shadow-2xl shadow-blue-500/5">
             <div className="space-y-2">
-              <h4 className="text-lg font-bold">Resource Repository</h4>
+              <h4 className="text-lg font-bold">Resource Center</h4>
               <p className="text-sm text-neutral-400 leading-relaxed">
                 Download pristine audio elements, media kits, and official administrative blueprints for regional deployment.
               </p>
@@ -216,7 +216,7 @@ export default function Home() {
           {/* LINK B - Financial Partnership (Already Gold) */}
           <div className="bg-gradient-to-br from-amber-500/5 to-transparent border border-amber-500/10 p-8 rounded-2xl backdrop-blur-md flex flex-col justify-between items-start space-y-6 shadow-xl shadow-amber-500/5">
             <div className="space-y-2">
-              <h4 className="text-lg font-bold text-amber-400">Financial Partnership</h4>
+              <h4 className="text-lg font-bold text-amber-400">Partner with Us</h4>
               <p className="text-sm text-neutral-400 leading-relaxed">
                 Sow transactional partnership seeds securely routed through the Espees Gateway to fuel global expansion infrastructures.
               </p>
