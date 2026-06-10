@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* 1. Define our Custom Premium Theme */
+@import "tailwindcss";
+
+/* 1. Define our New Cinematic Premium Theme */
+@import "tailwindcss";
+
+/* 1. Define our New Cinematic Premium Theme */
+@theme {
+  /* Cinematic Base (from image background) */
+  --color-brand-dark: #07070B; /* Deepest blue/purple black */
+  
+  /* Polished Metallic Gold (from 'WEEK', notes, clef) */
+  --color-brand-gold: #EFC14F;
+  --color-brand-gold-light: #FCEB9E;
+  --color-brand-gold-dark: #B98B23;
+  
+  /* Electric Cinematic Blue (from 'MUSIC' text & light trails) */
+  --color-brand-blue: #0A84FF;
+  --color-brand-blue-light: #6BB5FF;
+  --color-brand-blue-dark: #0056B3;
+
+  /* Vibrant Cinematic Magenta/Purple (from 'MUSIC' edge glows & equalizers) */
+  --color-brand-magenta: #E92CFF;
+  --color-brand-magenta-light: #F393FF;
+  --color-brand-magenta-dark: #A100B2;
+}
+
+/* 2. Global Styles & Background Setup */
+@layer base {
+  body {
+    background-color: var(--color-brand-dark);
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar optimized for new theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-brand-dark);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2A2A3A; /* Subdued dark gray */
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-blue-light);
+  }
+}
