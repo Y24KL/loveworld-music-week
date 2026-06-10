@@ -1,27 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion as motionClient } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Cpu, Radio, Sparkles, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
-export default function Hero() {
-  // ✅ FIXED DATE TARGET: June 21, 2026
-  const targetDate = new Date("2026-06-21T00:00:00").getTime();
-
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [isMounted, setIsMounted] = useState(false);
+export default function Home() {
+  // Target: June 21, 2026
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    setIsMounted(true);
-    const updateCountdown = () => {
+    const targetDate = new Date("2026-06-21T00:00:00").getTime();
+
+    const calculateTime = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -38,112 +29,202 @@ export default function Hero() {
       });
     };
 
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
+    calculateTime();
+    const interval = setInterval(calculateTime, 1000);
     return () => clearInterval(interval);
-  }, [targetDate]);
-
-  const countdownUnits = [
-    { label: "Days", value: timeLeft.days },
-    { label: "Hours", value: timeLeft.hours },
-    { label: "Minutes", value: timeLeft.minutes },
-    { label: "Seconds", value: timeLeft.seconds },
-  ];
+  }, []);
 
   return (
-    <section className="relative w-full min-h-screen bg-brand-dark overflow-hidden flex items-center justify-center pt-24">
+    <div className="bg-neutral-950 text-white min-h-screen relative font-sans overflow-x-hidden selection:bg-amber-500/30 selection:text-amber-200">
       
-      {/* Cinematic Ambient Swirls (Mirroring image light trails) */}
-      {/* 1. Electric Blue Top-Left Swirl */}
-      <div className="absolute top-[-10%] left-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-brand-blue/30 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
-      
-      {/* 2. Vibrant Magenta Bottom-Right Swirl (New color integration) */}
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] md:w-[700px] h-[500px] md:h-[700px] bg-brand-magenta/15 rounded-full blur-[150px] mix-blend-screen pointer-events-none" />
-      
-      {/* Overlay Mesh Pattern (Retained for texture) */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+      {/* GLOBAL CINEMATIC BACKDROP GLOWS */}
+      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[30%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[5%] w-[700px] h-[700px] bg-emerald-600/5 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
-        {/* Subtle Gold Subtitle Badge (Refined gold color) */}
-        <motionClient.p 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-brand-gold uppercase tracking-[0.25em] text-xs md:text-sm font-semibold border border-brand-gold/20 bg-brand-gold/5 px-4 py-1.5 rounded-full mb-6"
-        >
-          A Global Celebration of Sound & Spirit
-        </motionClient.p>
-
-        {/* Cinematic Main Heading - Split colors mirroring Image (Blue + Gold) */}
-        <motionClient.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1 }}
-          className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-tight leading-[1.1] mb-6"
-        >
-          {/* Mirroring LMW in Blue */}
-          <span className="text-brand-blue drop-shadow-[0_4px_15px_rgba(10,132,255,0.3)]">LoveWorld Music</span>
-          <br className="sm:hidden" />
-          {/* Mirroring WEEK in Gold */}
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-brand-gold-light via-brand-gold to-brand-gold-dark drop-shadow-[0_2px_10px_rgba(239,193,79,0.15)]">
-            Week
-          </span>
-        </motionClient.h1>
-
-        {/* Event Narrative Description (Clean text) */}
-        <motionClient.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="text-gray-400 text-base md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed"
-        >
-          Empowering global ministries with standard-setting resources, divine orchestration, and pristine digital assets. Get fully synchronized with the global flow.
-        </motionClient.p>
-
-        {/* Electric Premium Countdown Module (Vibrant Blue/Magenta accent) */}
-        {isMounted && (
-          <motionClient.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid grid-cols-4 gap-3 sm:gap-6 bg-white/[0.015] backdrop-blur-md border border-brand-blue/20 p-4 sm:p-8 rounded-2xl sm:rounded-3xl max-w-2xl w-full mb-12 shadow-[0_10px_50px_rgba(10,132,255,0.15)]"
-          >
-            {countdownUnits.map((unit, idx) => (
-              <div key={idx} className="flex flex-col items-center">
-                <span className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-1 bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
-                  {String(unit.value).padStart(2, "0")}
-                </span>
-                {/* Labels are vibrant gold like the image notes */}
-                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-brand-gold font-medium">
-                  {unit.label}
-                </span>
+      {/* HEADER NAVIGATION */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-neutral-950/40 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-amber-500 p-[1px]">
+              <div className="w-full h-full bg-neutral-950 rounded-full flex items-center justify-center overflow-hidden">
+                <span className="text-xs font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-amber-400">LMW</span>
               </div>
-            ))}
-          </motionClient.div>
-        )}
+            </div>
+            <span className="text-sm font-bold tracking-widest text-neutral-200 uppercase hidden sm:inline">LoveWorld Music Week</span>
+          </div>
+          <nav className="flex items-center gap-8 text-sm font-medium text-neutral-400">
+            <a href="#about" className="hover:text-white transition-colors">About</a>
+            <a href="#achievements" className="hover:text-white transition-colors">Vision</a>
+            <Link href="/give" className="px-5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-neutral-950 font-bold rounded-full transition-all text-xs tracking-wider uppercase shadow-lg shadow-amber-500/10">
+              Give
+            </Link>
+          </nav>
+        </div>
+      </header>
 
-        {/* Direct Action Navigation Buttons (Classic Golden Opportunity maintained) */}
-        <motionClient.div 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
-        >
-          <Link 
-            href="/resources" 
-            className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-gold to-brand-gold-dark text-brand-black font-bold rounded-full shadow-[0_4px_20px_rgba(239,193,79,0.3)] hover:shadow-[0_4px_30px_rgba(239,193,79,0.5)] hover:-translate-y-0.5 transition-all duration-200 group text-sm md:text-base"
-          >
-            Access Resource Center 
-            <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <Link 
-            href="/give" 
-            className="w-full sm:w-auto px-8 py-4 bg-white/[0.03] border border-white/10 hover:border-brand-magenta text-white font-medium rounded-full hover:bg-brand-magenta/15 transition-all duration-200 text-sm md:text-base"
-          >
-            Partner with LMM/LFAD
-          </Link>
-        </motionClient.div>
-      </div>
-    </section>
+      {/* SECTION 1: ELEVATED HERO VIEW */}
+      <section className="min-h-screen flex flex-col justify-center items-center px-4 pt-24 relative">
+        <div className="text-center max-w-4xl space-y-6 z-10 flex flex-col items-center">
+          
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/[0.03] border border-white/10 rounded-full text-xs font-semibold tracking-widest text-amber-400 uppercase backdrop-blur-sm animate-fade-in">
+            <Sparkles size={12} /> A Global Celebration of Sound & Spirit
+          </div>
+
+          <h1 className="text-5xl md:text-8xl font-black tracking-tight leading-none py-2">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-100 to-neutral-400">LoveWorld</span>
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+              Music Week
+            </span>
+          </h1>
+
+          <p className="text-base md:text-lg text-neutral-400 max-w-2xl leading-relaxed font-normal">
+            Empowering global ministries with standard-setting resources, divine orchestration, and pristine digital assets. Get fully synchronized with the global flow.
+          </p>
+
+          {/* DYNAMIC COUNTDOWN BOX */}
+          <div className="pt-6 w-full max-w-2xl">
+            <div className="bg-gradient-to-b from-white/[0.04] to-transparent border border-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-md shadow-2xl flex justify-around items-center text-center">
+              {[
+                { label: "Days", value: timeLeft.days },
+                { label: "Hours", value: timeLeft.hours },
+                { label: "Minutes", value: timeLeft.minutes },
+                { label: "Seconds", value: timeLeft.seconds }
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center w-20">
+                  <span className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 font-mono tracking-tight">
+                    {String(item.value).padStart(2, '0')}
+                  </span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-amber-500/70 mt-1">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ANCHOR CTA ACTION CONTROLS */}
+          <div className="pt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a href="#about" className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl transition-all font-semibold flex items-center justify-center gap-2 group text-sm">
+              Explore Vision <ChevronDown size={16} className="text-neutral-400 group-hover:text-white transition-colors" />
+            </a>
+          </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40 animate-bounce">
+          <span className="text-[10px] tracking-widest uppercase">Scroll to Discover</span>
+          <ChevronDown size={14} />
+        </div>
+      </section>
+
+      {/* SECTION 2: WHAT IT'S ALL ABOUT */}
+      <section id="about" className="py-32 px-6 max-w-7xl mx-auto relative z-20 scroll-mt-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-5 space-y-4">
+            <p className="text-xs uppercase font-bold tracking-widest text-blue-400">The Context</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+              An Alignment of <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-400">Sound & Purpose</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-7 bg-white/[0.01] border border-white/5 p-8 md:p-12 rounded-3xl backdrop-blur-xl space-y-6 text-neutral-300 leading-relaxed text-base md:text-lg">
+            <p>
+              LoveWorld Music Week is a divinely inspired global convergence designed to standardize, elevate, and align spiritual music production with ultimate excellence. It isn’t merely an assembly of creators—it is an active spiritual laboratory where divine blueprints meet state-of-the-art technological systems.
+            </p>
+            <p className="border-l-2 border-amber-500/40 pl-6 italic text-neutral-400 text-sm md:text-base">
+              "We are deploying pristine digital assets and structured administrative architectures to ensure the gospel’s message maintains unmatched global broadcasting authority."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: WHAT IT PLANS TO ACHIEVE */}
+      <section id="achievements" className="py-32 bg-neutral-900/30 border-y border-white/5 relative z-20">
+        <div className="max-w-7xl mx-auto px-6 space-y-16">
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <p className="text-xs uppercase font-bold tracking-widest text-amber-500">Core Objectives</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">Strategic Milestones</h2>
+            <p className="text-neutral-400 text-sm">Deploying three specific, highly integrated digital frameworks during this cycle.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* PILLAR 1 */}
+            <div className="bg-gradient-to-b from-white/[0.02] to-transparent border border-white/5 p-8 rounded-2xl flex flex-col space-y-4 hover:border-blue-500/20 transition-all group">
+              <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                <Radio size={22} />
+              </div>
+              <h3 className="text-xl font-bold tracking-wide">Global Synchronization</h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                Unifying administrative models across all regional chapters, anchoring them to a synchronized release schedule for absolute distribution impact.
+              </p>
+            </div>
+
+            {/* PILLAR 2 */}
+            <div className="bg-gradient-to-b from-white/[0.02] to-transparent border border-white/5 p-8 rounded-2xl flex flex-col space-y-4 hover:border-purple-500/20 transition-all group">
+              <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+                <Cpu size={22} />
+              </div>
+              <h3 className="text-xl font-bold tracking-wide">Pristine Asset Infrastructure</h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                Constructing secure, lightning-fast technical repositories to give administrators instant access to lossless audio stems and unified metadata masteries.
+              </p>
+            </div>
+
+            {/* PILLAR 3 */}
+            <div className="bg-gradient-to-b from-white/[0.02] to-transparent border border-white/5 p-8 rounded-2xl flex flex-col space-y-4 hover:border-amber-500/20 transition-all group">
+              <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                <ShieldCheck size={22} />
+              </div>
+              <h3 className="text-xl font-bold tracking-wide">Ecosystem Security</h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                Embedding automated verification logic and secure transactional parameters to maintain absolute operational integrity across digital touchpoints.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: ACTIONS AND CALL TO ENGAGEMENT */}
+      <section className="py-32 px-6 max-w-5xl mx-auto relative z-20 text-center space-y-12">
+        <div className="space-y-4">
+          <h2 className="text-4xl font-extrabold tracking-tight">Access Channels</h2>
+          <p className="text-neutral-400 text-base max-w-xl mx-auto">
+            Choose your deployment vector below to synchronize with ongoing preparations or secure financial seed options.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+          {/* LINK A */}
+          <div className="bg-white/[0.01] border border-white/5 p-8 rounded-2xl backdrop-blur-md flex flex-col justify-between items-start space-y-6">
+            <div className="space-y-2">
+              <h4 className="text-lg font-bold">Resource Repository</h4>
+              <p className="text-sm text-neutral-400 leading-relaxed">
+                Download pristine audio elements, media kits, and official administrative blueprints for regional deployment.
+              </p>
+            </div>
+            <button className="w-full py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl transition-all font-bold flex items-center justify-center gap-2 text-sm group">
+              Access Resource Center <ArrowUpRight size={16} className="text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </button>
+          </div>
+
+          {/* LINK B */}
+          <div className="bg-gradient-to-br from-amber-500/5 to-transparent border border-amber-500/10 p-8 rounded-2xl backdrop-blur-md flex flex-col justify-between items-start space-y-6">
+            <div className="space-y-2">
+              <h4 className="text-lg font-bold text-amber-400">Financial Partnership</h4>
+              <p className="text-sm text-neutral-400 leading-relaxed">
+                Sow transactional partnership seeds securely routed through the Espees Gateway to fuel global expansion infrastructures.
+              </p>
+            </div>
+            <Link href="/give" className="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-neutral-950 font-black rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-xl shadow-amber-500/5">
+              Partner with LMM/LFAD <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPACT FOOTER */}
+      <footer className="py-8 border-t border-white/5 text-center text-xs text-neutral-600 tracking-wider uppercase relative z-20">
+        © 2026 LoveWorld Music Ministry. All Rights Reserved.
+      </footer>
+    </div>
   );
 }
